@@ -40,10 +40,20 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
     const changes = req.body;
     db('accounts').where({ id: req.params.id }).update(changes).then(count => {
-        if (count > 0 ) {
+        if (count > 0) {
             res.status(200).json({ message: "Record updated." });
         } else {
             res.status(404).json({ message: "Account could not be found." });
+        }
+    })
+})
+
+router.delete('/:id', (req, res) => {
+    db('accounts').where({ id: req.params.id }).del().then(count => {
+        if (count > 0) {
+            res.status(200).json({ message: "Record deleted."})
+        } else {
+            res.status(404).json({ message: "Account could not be found."})
         }
     })
 })
