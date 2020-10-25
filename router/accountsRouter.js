@@ -13,7 +13,7 @@ router.get("/", (req, res) => {
     })
 })
 
-//Get Acounts by ID
+//Get Accounts by ID
 router.get("/:id", (req, res) => {
     db('accounts').where({ id: req.params.id }).first().then(accounts => {
         if (accounts) {
@@ -24,6 +24,15 @@ router.get("/:id", (req, res) => {
     })
     .catch(error => {
         res.status(500).json({ message: "Sorry, there was an error returning the data." });
+    })
+})
+//Post Accounts
+router.post('/', (req, res) => {
+    db('accounts').insert(req.body, "id").then(ids => {
+        res.status(201).json({ results: ids });
+    })
+    .catch(error => {
+        res.status(500).json({ message: "There was an error somewhere in the code." });
     })
 })
 
