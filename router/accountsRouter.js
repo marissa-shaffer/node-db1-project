@@ -3,6 +3,7 @@ const db = require("../data/dbConfig")
 
 const router = express.Router()
 
+//Get Accounts
 router.get("/", (req, res) => {
     db.select('*').from('accounts').then(rows => {
         res.status(200).json({ data: rows });
@@ -12,6 +13,7 @@ router.get("/", (req, res) => {
     })
 })
 
+//Get Acounts by ID
 router.get("/:id", (req, res) => {
     db('accounts').where({ id: req.params.id }).first().then(accounts => {
         if (accounts) {
