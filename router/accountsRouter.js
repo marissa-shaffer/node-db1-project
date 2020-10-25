@@ -48,6 +48,7 @@ router.put('/:id', (req, res) => {
     })
 })
 
+//Delete Account by ID
 router.delete('/:id', (req, res) => {
     db('accounts').where({ id: req.params.id }).del().then(count => {
         if (count > 0) {
